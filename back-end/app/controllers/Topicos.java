@@ -35,7 +35,6 @@ public class Topicos extends Controller {
         List<Topico> topicos = Topico.find
                             .fetch("autor")
                             .fetch("respostas")
-                            .fetch("respostas.autor")
                             .where().eq("id",id)
                             .findList();
         return ok(Json.toJson(topicos));

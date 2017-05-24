@@ -33,19 +33,20 @@ public class Respostas extends Controller {
     public Result addReply(Long id) {
         DynamicForm dynamicForm = Form.form().bindFromRequest();
         Map<String,String> resp = new HashMap<>();
-        //try {
+        try {
             Resposta resposta = new Resposta();
             Usuario usuario = Usuario.find.byId(Long.parseLong(session("usuario.logado")));
             Topico topico = Topico.find.byId(id);
             resposta.autor = usuario;
+            resposta.topico = topico;
             resposta.mensagem = dynamicForm.get("mensagem");
             resposta.save();
             resp.put("code","200");
             resp.put("message","Usuário registrado com sucesso");
-        /*}catch(Exception e){
+        }catch(Exception e){
             resp.put("code","500");
             resp.put("message",e.getMessage());
-        }*/
+        }
         //Retornando JSON
         return ok(Json.toJson(resp));
     }

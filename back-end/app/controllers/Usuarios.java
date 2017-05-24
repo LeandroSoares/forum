@@ -13,6 +13,8 @@ import models.Usuario;
 import com.avaje.ebean.*;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
+import play.api.mvc.Cookie;
+import play.api.mvc.DiscardingCookie;
 
 
 /**
@@ -65,6 +67,8 @@ public class Usuarios extends Controller {
             .eq("senha", dynamicForm.get("pass"))
             .findList();
             if (usuarios.size() == 1) {
+                session("usuario.logado", Long.toString(usuarios.get(0).id));
+                response().setCookie("usuario.logado", Long.toString(usuarios.get(0).id));
                 resp.put("code","200");
                 resp.put("message","Usuário logado com sucesso");    
             }else{
@@ -75,14 +79,13 @@ public class Usuarios extends Controller {
             resp.put("code","500");
             resp.put("message",e.getMessage());
         }
-        //Retornando JSON
-        //Http.Cookie("usuario.logado", Long.toString(usuarios.get(0).id),3600,"",null,false,false);
-        session("usuario.logado", Long.toString(usuarios.get(0).id));
+        //Retornando JSON        
         return ok(Json.toJson(resp));
     }
     public Result logout() {
         Map<String,String> resp = new HashMap<>();
         session().clear();
+        response().discardCookie("usuario.logado");
         resp.put("code","200");
         resp.put("message","Usuário deslogado com sucesso");    
         return ok(Json.toJson(resp));
