@@ -7,23 +7,26 @@ import 'rxjs/add/operator/map'
 @Injectable()
 export class AuthService {
     
-    constructor() { }
+    private loggedIn: Subject<boolean> = new Subject<boolean>();
     
-    private loggedIn: Subject<any> = new Subject<any>();
+    constructor() { 
+        this.loggedIn.next(false);
+    }
     
     authenticate(usermail) {
         localStorage.setItem('currentUser', JSON.stringify({email: usermail}));
         this.loggedIn.next(!!localStorage.getItem('currentUser'));
-        console.log(this.loggedIn);
     }
     
-    get isLogged(): any{
+    get isLoggedIn() {
         return this.loggedIn.asObservable();
     }
-    
+    checkLogged(){
+        console.log(!!localStorage.getItem('currentUser'));
+        this.loggedIn.next(!!localStorage.getItem('currentUser'));
+    }
     logout() {
         localStorage.removeItem('currentUser');
         this.loggedIn.next(!!localStorage.getItem('currentUser'));
-        console.log(this.loggedIn);
     }
 }

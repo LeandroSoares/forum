@@ -11,9 +11,11 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a *ngIf="userLogged" routerLink="/novotopico" >Criar Topico</a></li>
-            <li><a *ngIf="userLogged" routerLink="/login" >Logout</a></li>
-            <li><a *ngIf="!userLogged" routerLink="/login" >Login</a></li>
+
+            
+            <li><a *ngIf="logged" routerLink="/novotopico" >Criar Topico</a></li>
+            <li><a *ngIf="logged" routerLink="/login" >Logout</a></li>
+            <li><a *ngIf="!logged" routerLink="/login" >Login</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>

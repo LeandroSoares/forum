@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -7,10 +9,13 @@ import { AuthService } from '../auth/auth.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private authService: AuthService) { }
-  userLogged:boolean=false;
+  constructor(private authService: AuthService, private router:Router) { 
+  	router.events.subscribe((val) => {this.logged=!!localStorage.getItem('currentUser');})
+  }
+  logged:boolean;
   ngOnInit() {
-  	this.userLogged = this.authService.isLogged;
+  	this.logged=!!localStorage.getItem('currentUser');
+
   }
 
 }

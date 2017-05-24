@@ -8,14 +8,16 @@ import { TopicService } from './topic.service';
   styleUrls: ['./topic.component.css']
 })
 export class TopicComponent implements OnInit {
-topic:{id:number};
+topic:{id:number}=null;
   constructor(private route:ActivatedRoute, private topicService:TopicService) { }
   
   ngOnInit() {
     console.log(this.route.snapshot.params['id']);
+    this.topicService.getTopic(this.route.snapshot.params['id'])
+    	.subscribe(
+    		(data)=>{this.topic=data;console.log(data);}
+    		);
     
-    this.topic=this.topicService.getTopic(this.route.snapshot.params['id']);
-    console.log(this.topic);
   }
 
 

@@ -2,11 +2,10 @@
   <div class="row">
   <a [routerLink]="['/']" class="pull-right">Voltar</a>
   </div>
-
-  <h1><small>#{{topic.id}} </small> {{topic.name}}</h1>
-  <p>{{topic.description}}</p>
-  <p>{{topic.text}}</p>
-	
-	<app-post-list></app-post-list>
-
+	<div *ngIf="topic">
+	  <h1><small>#{{topic.id}} </small> {{topic.name}}</h1>
+	  <p>{{topic.description}}</p>
+	  <p>{{topic.text}}</p>
+		<app-post-list></app-post-list>
+	</div>
 </div>
