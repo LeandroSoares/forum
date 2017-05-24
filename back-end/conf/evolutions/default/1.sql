@@ -14,6 +14,7 @@ create table resposta (
   id                            bigint auto_increment not null,
   mensagem                      varchar(255),
   topico_id                     bigint,
+  data                          datetime(6),
   autor_id                      bigint,
   constraint pk_resposta primary key (id)
 );

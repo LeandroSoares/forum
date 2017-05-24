@@ -21,6 +21,9 @@ public class Resposta extends Model {
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     public Topico topico;
 
+    @Constraints.Required
+    public Date data;
+
     @ManyToOne
     public Usuario autor;
 
