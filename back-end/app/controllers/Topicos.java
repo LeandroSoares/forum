@@ -32,13 +32,54 @@ public class Topicos extends Controller {
     //public Result register(String name , String email , String pass) {
     public Result getTopic(Long id) {
         //Buscando Todos os Usuarios
-        List<Topico> topicos = Topico.find
+        // List<Topico> topicos = Topico.find
+        //                     .fetch("autor")
+        //                     .fetch("respostas")
+        //                     .where().eq("id",id)
+        //                     .findList();
+        // return ok(Json.toJson(topicos));
+        // 
+         List<Topico> topicos = Topico.find
                             .fetch("autor")
                             .fetch("respostas")
                             .where().eq("id",id)
                             .findList();
-        return ok(Json.toJson(topicos));
+        List<Map> topicosFiltrados = new ArrayList<>();
+
+        for(Topico topic : topicos){
+            Map<String, Object> topicoF = new HashMap<>();            
+            topicoF.put("id",topic.id);
+            topicoF.put("titulo",topic.titulo);
+            topicoF.put("autor",this.parseAutor(topic.autor));
+            topicosFiltrados.add(topicoF);
+             List<Map> resps = this.parseRespostas(topic.respostas);
+            
+            topicoF.put("respostas",resps);
+        }
+
+        return ok(Json.toJson(topicosFiltrados));
     }
+
+    private  List<Map> parseRespostas(List<Resposta> respostas ){
+         List<Map> resps = new ArrayList<>();
+        for(Resposta resposta:respostas){
+            Map<String, Object> resp = new HashMap<>(); 
+            resp.put("id",resposta.id); 
+            resp.put("mensagem",resposta.mensagem);
+            resp.put("autor",this.parseAutor(resposta.autor));
+            resps.add(resp);
+        }
+        return resps;
+    }
+
+    private Map<String, Object> parseAutor(Usuario autor){
+        Map<String, Object> resp = new HashMap<>(); 
+        resp.put("id",autor.id); 
+        resp.put("nome",autor.nome);
+        return resp;
+    }
+
+
     public Result createTopic() {
         return ok();
     }
