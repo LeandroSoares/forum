@@ -8,9 +8,14 @@ import { PostSubmitComponent } from './post-submit/post-submit.component';
   styleUrls: ['./topic.component.css']
 })
 export class TopicComponent implements OnInit {
+  
   logged=false;
+  
   topic:{id:number}=null;
-  constructor(private route:ActivatedRoute, private topicService:TopicService, private router:Router) { 
+  
+  constructor(private route:ActivatedRoute, 
+              private topicService:TopicService, 
+              private router:Router) { 
 
     router.events
           .subscribe((val) => {
