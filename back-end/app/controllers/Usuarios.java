@@ -82,11 +82,7 @@ public class Usuarios extends Controller {
                 response().setCookie(Http.Cookie.builder("userid", Long.toString(usuarios.get(0).id)).withSecure(ctx().request().secure()).build());
                 resp.put("code","200");
                 resp.put("message","Usuário logado com sucesso");    
-<<<<<<< HEAD
-                resp.put("userlogado", Long.toString(usuarios.get(0).id));
-=======
                 resp.put("userid", Long.toString(usuarios.get(0).id));
->>>>>>> 5e62b793a4cae380f0b82bfcae9dc53194504ed3
             }else{
                 resp.put("code","500");
                 resp.put("message","Usuário ou senha incorretos");
@@ -109,6 +105,7 @@ public class Usuarios extends Controller {
 
 
     public Result logado() {        
+        Map<String,String> resp = new HashMap<>();
         resp.put("code","200");
         resp.put("usuario",session().get("usuario.logado"));
         return ok(Json.toJson(resp));

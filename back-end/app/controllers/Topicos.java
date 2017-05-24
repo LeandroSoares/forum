@@ -95,7 +95,9 @@ public class Topicos extends Controller {
             resposta.topico = topico;
             resposta.autor = Usuario.find.byId(Long.parseLong(dynamicForm.get("userid")));
             resposta.data = new Date();
+            resposta.save();
             resp.put("message","Topico registrado com sucesso");
+            resp.put("topicid",Long.toString(topico.id));
             }catch(Exception e){
             resp.put("code","500");
             resp.put("message",e.getMessage());
