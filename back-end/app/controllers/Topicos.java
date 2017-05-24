@@ -81,7 +81,46 @@ public class Topicos extends Controller {
 
 
     public Result createTopic() {
-        return ok();
+        DynamicForm dynamicForm = Form.form().bindFromRequest();
+        Map<String,String> resp = new HashMap<>();
+        try{
+            Topico topico = new Topico();
+            topico.titulo = dynamicForm.get("titulo");
+            topico.save();
+            resp.put("code","200");
+            resp.put("message.topico","Topico registrado com sucesso");
+            Resposta resposta = new Resposta();
+            resposta.mensagem = dynamicForm.get("titulo");
+            resposta.topico = topico;
+            Usuario usuario = Usuario.find.byId(Long.parseLong(Http.Context.current().session().get("usuario.logado")));
+            resposta.autor = usuario;
+            resposta.data = new Date();
+            resp.put("message","Topico registrado com sucesso");
+            }catch(Exception e){
+            resp.put("code","500");
+            resp.put("message",e.getMessage());
+        }
+        //Retornando JSON
+        return ok(Json.toJson(resp));
+    }
+
+public Result addReply() {
+        DynamicForm dynamicForm = Form.form().bindFromRequest();
+        Map<String,String> resp = new HashMap<>();
+        try{
+            Resposta resposta = new Resposta();
+            resposta.mensagem = dynamicForm.get("resposta");
+            resposta.topico = Topico.find.byId(Long.parseLong(dynamicForm.get("topico")));
+            //resposta.autor = Usuario.find.byId(Long.parseLong(Http.Context.current().session().get("usuario.logado")));
+            resposta.data = new Date();
+            resposta.save();
+            resp.put("message","Resposta registrado com sucesso");
+            }catch(Exception e){
+            resp.put("code","500");
+            resp.put("message",e.getMessage());
+        }
+        //Retornando JSON
+        return ok(Json.toJson(resp));
     }
 
 
@@ -103,40 +142,7 @@ public class Topicos extends Controller {
 
         return ok(Json.toJson(topicosFiltrados));
     }
-    //public Result login(String email, String pass) {
-    public Result login() {
-        
-        /*
-        //Buscando Todos os Usuarios
-        List<Usuario> usuarios = Usuario.find.all();
-        return ok(Json.toJson(usuarios));
-        */
-
-        /*
-        // Procurando um usuario pelo ID
-        Usuario umusuario = Usuario.find.byId(1L);
-        return ok(Json.toJson(umusuario));
-        */
-        
-        /*
-        // Deletar um usuario pelo ID
-        Usuario.find.ref(1L).delete();
-        */
-        /*
-        // Uma Busca mais Complexa :)
-        List<Usuario> buscaUsuario = Usuario.find.where()
-            .ilike("nome", "%doug%")
-            .orderBy("id asc")
-            .findPagedList(0, 25)
-            .getList();
-        return ok(Json.toJson(buscaUsuario));
-        */
-
-        return ok("Utilize o front-end");
-        
-
-    }
-
+    
 }
 
 

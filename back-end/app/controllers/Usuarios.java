@@ -15,6 +15,14 @@ import java.text.SimpleDateFormat;
 import java.text.ParseException;
 import play.api.mvc.Cookie;
 import play.api.mvc.DiscardingCookie;
+import play.api.http.HeaderNames;
+import play.mvc.Http.Response;
+import play.mvc.Http.Context;
+import play.mvc.Http.Request;
+import play.mvc.Http.Session;
+import play.mvc.Result;
+import play.mvc.Security;
+import play.mvc.*;
 
 
 /**
@@ -67,10 +75,14 @@ public class Usuarios extends Controller {
             .eq("senha", dynamicForm.get("pass"))
             .findList();
             if (usuarios.size() == 1) {
+                //session().clear();
                 session("usuario.logado", Long.toString(usuarios.get(0).id));
-                response().setCookie("usuario.logado", Long.toString(usuarios.get(0).id));
+                System.out.println(session("usuario.logado"));
+                //response().setCookie("usuario.logado", Long.toString(usuarios.get(0).id));
+                response().setCookie(Http.Cookie.builder("usuario.logado", Long.toString(usuarios.get(0).id)).withSecure(ctx().request().secure()).build());
                 resp.put("code","200");
                 resp.put("message","Usuário logado com sucesso");    
+                resp.put("usuario.logado", Long.toString(usuarios.get(0).id));
             }else{
                 resp.put("code","500");
                 resp.put("message","Usuário ou senha incorretos");
@@ -91,10 +103,13 @@ public class Usuarios extends Controller {
         return ok(Json.toJson(resp));
     }
 
+
     public Result logado() {        
         Map<String,String> resp = new HashMap<>();
-        resp.put("code","200");
-        resp.put("usuario",session("usuario.logado"));    
+        Context ctx = Http.Context.current();
+        Request request = Http.Context.current().request();
+            resp.put("code","200");
+            resp.put("usuario",Http.Context.current().session().get("usuario.logado"));
         return ok(Json.toJson(resp));
     }
 

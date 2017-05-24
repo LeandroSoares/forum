@@ -6,7 +6,8 @@
 GET     /                                       controllers.HomeController.index
 GET     /topicos                                controllers.Topicos.getAll
 GET     /topico/:id                             controllers.Topicos.getTopic(id: Long)
-POST    /topico                                 controllers.Topicos.createTopic()
+POST    /topico/create                          controllers.Topicos.createTopic()
+POST    /topico/addresposta                     controllers.Topicos.addReply()
 GET     /resposta/add/:id                       controllers.Respostas.addReply(id: Long)
 GET     /usuario/logado                         controllers.Usuarios.logado
 POST    /usuario/register                       controllers.Usuarios.register
