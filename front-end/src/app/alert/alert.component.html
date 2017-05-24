@@ -1,0 +1,9 @@
+<div 
+	*ngIf="message" 
+	(click)="message=''" 
+	[ngClass]="{ 'alert': message, 'alert-success': message.type === 'success', 'alert-danger': message.type === 'error' }">
+		<p>	
+			{{message.text}}
+		</p>
+		<small class="pull-right">Click to dismiss</small>
+</div>

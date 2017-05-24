@@ -1,0 +1,18 @@
+
+<div class="row">
+  <div class="panel panel-default">
+  <div class="panel-body">
+    <h4 class="panel-title">{{postData.owner}} - 
+      <small class=""> 12/12/2017 </small>    
+    </h4>
+    <br>
+    <textarea class="form-control" [(ngModel)]="postData.text" name="" id="" cols="100%" rows="10"></textarea>
+  </div>
+  <div class="panel-footer">
+    <div class="navbar-collapse collapse" id="navbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><button (click)="save(postData)" class="btn btn-success">Salvar</button></li>
+      </ul>
+    </div>
+  </div>
+</div>

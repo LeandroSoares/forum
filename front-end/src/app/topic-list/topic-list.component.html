@@ -1,0 +1,11 @@
+<table class="table table-default">
+  <tr>
+    <th>Tópico</th>
+    <th>Autor</th>
+  </tr>
+  <tr 
+  	app-topic-list-item 
+  	*ngFor="let topic of topics|filter:query" 
+  	[topic]="topic"></tr>
+ 
+</table>
