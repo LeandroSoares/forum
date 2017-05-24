@@ -2,23 +2,23 @@
 <div class="row">
   <div class="panel panel-default">
   <div class="panel-heading">
-    <h4 class="panel-title">{{post.owner}} - 
-      <small class=""> {{date|date:'d/m/y'}} </small> 
+    <h4 class="panel-title">{{post.autor.nome}} - 
+      <!-- <small class=""> {{date|date:'d/m/y'}} </small>  -->
         <div class="pull-right">
           <span
                 (click)="isFavorite=!isFavorite" 
                 class="favoriteIt label label-default" 
                 [ngClass]="{ 'alert-warning': isFavorite }">
             <span class="glyphicon glyphicon-star" aria-hidden="true"></span> 
-            {{post.totalFavorites}}
+            <!-- {{post.totalFavorites}} -->
           </span>
         </div>
     </h4>
   </div>
   <div class="panel-body">
-    <div [innerHTML]="post.text" *ngIf="!isEditing"></div>
+    <div [innerHTML]="post.mensagem" *ngIf="!isEditing"></div>
     <!-- <textarea name="" id="" cols="30" rows="10"></textarea> -->
-    <textarea cols="100" rows="10" class="form-control" [(ngModel)]="textEdit" *ngIf="isEditing" [autofocus]="isEditing">{{post.text}}</textarea>
+    <textarea cols="100" rows="10" class="form-control" [(ngModel)]="textEdit" *ngIf="isEditing" [autofocus]="isEditing">{{post.mensagem}}</textarea>
   </div>
   <div class="panel-footer" *ngIf="isOwner">
     <div class="navbar-collapse collapse" id="navbar">

@@ -3,9 +3,10 @@
   <a [routerLink]="['/']" class="pull-right">Voltar</a>
   </div>
 	<div *ngIf="topic">
-	  <h1><small>#{{topic.id}} </small> {{topic.name}}</h1>
-	  <p>{{topic.description}}</p>
-	  <p>{{topic.text}}</p>
-		<app-post-list></app-post-list>
+	  <h1><small>#{{topic.id}} </small> {{topic.titulo}}</h1>
+	  <p>by {{topic.autor.nome}}</p>
+	  <p>{{topic.descricao}}</p>
+	  <!-- <p>{{topic.text}}</p> -->
+		<app-post-list [posts]="topic.respostas"></app-post-list>
 	</div>
 </div>

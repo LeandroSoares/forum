@@ -21,13 +21,13 @@ export class PostComponent implements OnInit {
    }
 
   ngOnInit() {
-  	this.textEdit=this.post.text;
+  	this.textEdit=this.post.mensagem;
   }
   deletePost(){
   	this.edit.emit({method:'delete',id:this.post.id});
   }
   putPost(){
-  	this.edit.emit({method:'put',post:new PostModel(this.post.id,this.post.owner,this.textEdit)});
+  	this.edit.emit({method:'put',post:new PostModel(this.post.id,this.post.autor,this.textEdit)});
   	this.isEditing=false;
   }
 }	
