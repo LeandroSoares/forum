@@ -19,7 +19,7 @@ public class Favorito extends Model {
     public Resposta resposta;
     
     @ManyToOne
-    public Usuario autor;
+    public Usuario usuario;
 
     public static Finder<Long, Favorito> find = new Finder<Long,Favorito>(Favorito.class);
 }
