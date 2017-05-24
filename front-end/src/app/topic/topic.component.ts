@@ -16,7 +16,8 @@ topic:{id:number}=null;
     this.topicService.getTopic(this.route.snapshot.params['id'])
     	.subscribe(
     		(data)=>{this.topic=data[0];
-          console.log(data);}
+          console.log(data);
+        }
     		);
     
   }

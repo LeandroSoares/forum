@@ -20,7 +20,7 @@ export class TopicService {
 
   }
   
-  create(topic:{nome:string, descricao:string}):any{
-     return this.http.post("http://localhost:9000/topico",topic).map((response: Response) => response.json());
+  create(topic:{titulo:string, descricao:string}):any{
+     return this.http.post("http://localhost:9000/topico/create",topic).map((response: Response) => response.json());
   } 
 }
