@@ -23,8 +23,9 @@ export class TopicComponent implements OnInit {
           });
   }
   onsave(text){
-    this.topicService.addResposta({topico:this.topic.id, resposta:text}).subscribe((d)=>console.log(d));
-    this.loadRespostas();
+    this.topicService.addResposta(this.topic.id, text)
+    .subscribe((d)=>{console.log(d);this.loadRespostas();});
+      
   }
   ngOnInit() {
     this.loadRespostas();

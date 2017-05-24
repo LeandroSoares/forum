@@ -28,7 +28,9 @@ export class TopicService {
     return this.http.post("http://localhost:9000/topico/create",datacreate).map((response: Response) => response.json());
   } 
 
-  addResposta(resp:{topico:any,resposta:any}):any{
+  addResposta(topico:any,resposta:any):any{
+    let data = JSON.parse(localStorage.getItem('currentUser'));
+    let resp = {topico:topico, resposta:resposta,userid:data.id};
      return this.http.post("http://localhost:9000/topico/addresposta",resp).map((response: Response) => response.json());
   }
 }
