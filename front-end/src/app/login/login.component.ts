@@ -40,7 +40,8 @@ export class LoginComponent implements OnInit {
             .subscribe(
                 data => {
                     this.router.navigate([this.returnUrl]);
-					this.authService.authenticate(this.model.email);
+					console.log(data);
+					this.authService.authenticate(data.userid, this.model.email);
                 },
                 error => {
                     this.alertService.error("Erro de login...");

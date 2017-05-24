@@ -76,13 +76,17 @@ public class Usuarios extends Controller {
             .findList();
             if (usuarios.size() == 1) {
                 //session().clear();
-                session("usuario.logado", Long.toString(usuarios.get(0).id));
-                System.out.println(session("usuario.logado"));
-                //response().setCookie("usuario.logado", Long.toString(usuarios.get(0).id));
-                response().setCookie(Http.Cookie.builder("usuario.logado", Long.toString(usuarios.get(0).id)).withSecure(ctx().request().secure()).build());
+                session("userid", Long.toString(usuarios.get(0).id));
+                System.out.println(session("userid"));
+                //response().setCookie("userid", Long.toString(usuarios.get(0).id));
+                response().setCookie(Http.Cookie.builder("userid", Long.toString(usuarios.get(0).id)).withSecure(ctx().request().secure()).build());
                 resp.put("code","200");
                 resp.put("message","Usuário logado com sucesso");    
+<<<<<<< HEAD
                 resp.put("userlogado", Long.toString(usuarios.get(0).id));
+=======
+                resp.put("userid", Long.toString(usuarios.get(0).id));
+>>>>>>> 5e62b793a4cae380f0b82bfcae9dc53194504ed3
             }else{
                 resp.put("code","500");
                 resp.put("message","Usuário ou senha incorretos");
@@ -97,7 +101,7 @@ public class Usuarios extends Controller {
     public Result logout() {
         Map<String,String> resp = new HashMap<>();
         session().clear();
-        response().discardCookie("usuario.logado");
+        response().discardCookie("userid");
         resp.put("code","200");
         resp.put("message","Usuário deslogado com sucesso");    
         return ok(Json.toJson(resp));

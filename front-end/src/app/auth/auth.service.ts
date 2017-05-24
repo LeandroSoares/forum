@@ -13,11 +13,15 @@ export class AuthService {
         this.loggedIn.next(false);
     }
     
-    authenticate(usermail) {
-        localStorage.setItem('currentUser', JSON.stringify({email: usermail}));
+    authenticate(id,email) {
+
+        localStorage.setItem('currentUser', JSON.stringify({email:email,id:id}));
         this.loggedIn.next(!!localStorage.getItem('currentUser'));
     }
-    
+    getUserid(){
+        let data = JSON.parse(localStorage.getItem('currentUser'));
+        return data.userid;
+    }
     get isLoggedIn() {
         return this.loggedIn.asObservable();
     }
