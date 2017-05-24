@@ -86,14 +86,14 @@ public class Topicos extends Controller {
         try{
             Topico topico = new Topico();
             topico.titulo = dynamicForm.get("titulo");
+            topico.autor = Usuario.find.byId(Long.parseLong(dynamicForm.get("userid")));
             topico.save();
             resp.put("code","200");
             resp.put("message.topico","Topico registrado com sucesso");
             Resposta resposta = new Resposta();
             resposta.mensagem = dynamicForm.get("titulo");
             resposta.topico = topico;
-            Usuario usuario = Usuario.find.byId(Long.parseLong(Http.Context.current().session().get("usuario.logado")));
-            resposta.autor = usuario;
+            resposta.autor = Usuario.find.byId(Long.parseLong(dynamicForm.get("userid")));
             resposta.data = new Date();
             resp.put("message","Topico registrado com sucesso");
             }catch(Exception e){
@@ -111,7 +111,7 @@ public Result addReply() {
             Resposta resposta = new Resposta();
             resposta.mensagem = dynamicForm.get("resposta");
             resposta.topico = Topico.find.byId(Long.parseLong(dynamicForm.get("topico")));
-            //resposta.autor = Usuario.find.byId(Long.parseLong(Http.Context.current().session().get("usuario.logado")));
+            resposta.autor = Usuario.find.byId(Long.parseLong(dynamicForm.get("userid")));
             resposta.data = new Date();
             resposta.save();
             resp.put("message","Resposta registrado com sucesso");
