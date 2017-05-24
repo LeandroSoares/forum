@@ -16,20 +16,7 @@
     </h4>
   </div>
   <div class="panel-body">
-    <div [innerHTML]="post.mensagem" *ngIf="!isEditing"></div>
-    <!-- <textarea name="" id="" cols="30" rows="10"></textarea> -->
-    <textarea cols="100" rows="10" class="form-control" [(ngModel)]="textEdit" *ngIf="isEditing" [autofocus]="isEditing">{{post.mensagem}}</textarea>
+    <div [innerHTML]="post.mensagem"></div>
   </div>
-  <div class="panel-footer" *ngIf="isOwner">
-    <div class="navbar-collapse collapse" id="navbar">
-      <ul class="nav navbar-nav navbar-right" *ngIf="!isEditing">
-        <li><button class="btn btn-primary"(click)="isEditing=true">Editar</button></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right" *ngIf="isEditing">
-        <li><button class="btn btn-danger" (click)="deletePost()">Deletar</button></li>
-        <li><button class="btn btn-success"(click)="putPost()">Salvar</button></li>
-        <li><button class="btn btn-warning"(click)="isEditing=false">Cancelar</button></li>
-      </ul>
-    </div>
-  </div>
+  
 </div>

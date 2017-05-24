@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , Output, EventEmitter} from '@angular/core';
 import { PostService } from '../post/post.service';
 
 @Component({
@@ -7,13 +7,17 @@ import { PostService } from '../post/post.service';
   styleUrls: ['./post-submit.component.css']
 })
 export class PostSubmitComponent implements OnInit {
-
-  constructor(private postService: PostService) { }
+  
+  @Output("save") savecall:EventEmitter<string> = new EventEmitter<string>();
+  
   postData={owner:"Me",text:""};
-  ngOnInit() {
-  }
+  
+  constructor(private postService: PostService) { }
+  
+  ngOnInit() {}
+
   save(postData){
-  	this.postService.setPost(postData);
+    this.savecall.emit(postData.text);
   	this.postData={owner:"Me",text:""};
   }
 }

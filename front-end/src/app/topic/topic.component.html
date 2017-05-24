@@ -8,5 +8,6 @@
 	  <p>{{topic.descricao}}</p>
 	  <!-- <p>{{topic.text}}</p> -->
 		<app-post-list [posts]="topic.respostas"></app-post-list>
+		<app-post-submit *ngIf="logged" (save)="onsave($event)"></app-post-submit>
 	</div>
 </div>
