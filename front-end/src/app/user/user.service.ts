@@ -20,7 +20,8 @@ export class UserService {
     
     login(logindata:{ email:string, pass:string }){
 
-        return this.http.post(loginUrl, logindata);
+        return this.http.post(loginUrl, logindata)
+        .map((response: Response) => response.json());
     }
 
     logout() {
