@@ -32,14 +32,15 @@ public class Topicos extends Controller {
     //public Result register(String name , String email , String pass) {
     public Result getTopic(Long id) {
         //Buscando Todos os Usuarios
-        // List<Topico> topicos = Topico.find
-        //                     .fetch("autor")
-        //                     .fetch("respostas")
-        //                     .where().eq("id",id)
-        //                     .findList();
-        // return ok(Json.toJson(topicos));
-        // 
          List<Topico> topicos = Topico.find
+                             .fetch("autor")
+                             .fetch("respostas")
+                             .fetch("respostas.autor")
+                             .where().eq("id",id)
+                             .findList();
+         return ok(Json.toJson(topicos));
+         /*
+        List<Topico> topicos = Topico.find
                             .fetch("autor")
                             .fetch("respostas")
                             .where().eq("id",id)
@@ -57,7 +58,7 @@ public class Topicos extends Controller {
             topicoF.put("respostas",resps);
         }
 
-        return ok(Json.toJson(topicosFiltrados));
+        return ok(Json.toJson(topicosFiltrados));*/
     }
 
     private  List<Map> parseRespostas(List<Resposta> respostas ){
